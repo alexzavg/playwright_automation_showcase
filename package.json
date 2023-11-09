@@ -1,11 +1,12 @@
 {
-  "name": "playwright-tests-template",
+  "name": "playwright_automation_showcase",
   "version": "1.0.0",
-  "description": "Playwright tests template",
+  "description": "Playwright Automation Showcase",
   "main": "index.js",
   "scripts": {
     "kill_npm": "pkill -f 'npm run'",
     "setup": "npm i && npm i -g ts-node && npx playwright install --with-deps",
+    "template": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=template",
     "e2e_tests_stage": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=e2e",
     "e2e_tests_prod": "cross-env test_env=prod npx playwright test --config=e2e.playwright.config.ts --project=e2e"
   },
@@ -16,7 +17,6 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.37.1",
-    "aws-sdk": "^2.1443.0",
     "chalk": "^4.1.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
@@ -24,7 +24,6 @@
     "path": "^0.12.7",
     "playwright": "^1.37.1",
     "request": "^2.88.2",
-    "snowflake-promise": "^4.5.0",
     "speakeasy": "^2.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"

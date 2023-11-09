@@ -3,20 +3,8 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 const config: PlaywrightTestConfig = {
   projects: [
     {
-      name: 'data_cleanup',
-      testMatch: ['/tests/data_cleanup/*.spec.ts']
-    },
-    {
       name: 'template',
       testMatch: ['/tests/_template/*.spec.ts']
-    },
-    {
-      name: 'regression',
-      testMatch: ['/tests/Regression/**/*.spec.ts']
-    },
-    {
-      name: 'integration',
-      testMatch: ['/tests/Integration/**/*.spec.ts']
     },
     {
       name: 'e2e',
