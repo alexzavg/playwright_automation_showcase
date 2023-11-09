@@ -1,0 +1,12 @@
+node_modules
+playwright-report
+test-results
+allure-results
+allure-report
+html-report
+package-lock.json
+package-lock
+.vscode
+.env.dev
+.env.stage
+.env.prod
