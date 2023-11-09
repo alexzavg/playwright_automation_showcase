@@ -7,6 +7,6 @@
    1. `npm i`
    2. `npm i -g ts-node`
    3. `npx playwright install --with-deps`
-   *if you encounter an EACCESS error - try the same command with `sudo` at the beginning
+   *if you encounter an `EACCESS` error - try the same command with `sudo` at the beginning
 4. Run `npm run template` - if test passes then you did everything right :)
 5. See available commands in `package.json`
