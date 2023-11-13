@@ -14,6 +14,7 @@ test.describe('', () => {
   test('', async ({page}) => {
 
     await test.step('', async () => {
+      console.log(process.env.ENV_NAME)
       expect(true).toBe(true)
     });
     
