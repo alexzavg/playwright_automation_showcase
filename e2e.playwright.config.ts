@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
   use: {
     ...base.use,
     headless: false,
-    viewport: null,
+    viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     launchOptions: {
       slowMo: 250,
