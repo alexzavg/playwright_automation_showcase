@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
       title: 'Playwright HTML Report',
       embedAssets: true,
       embedAttachments: true,
-      outputFolder: 'playwright-html-report',
+      outputFolder: 'html-report',
       minifyAssets: true,
       startServer: true,
     }]
