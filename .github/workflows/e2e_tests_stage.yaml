@@ -45,6 +45,7 @@ jobs:
       run: xvfb-run npm run $TEST_SUITE
 
     - name: 📊 Deploy HTML Report
+      if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
