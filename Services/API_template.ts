@@ -3,7 +3,7 @@ import { expect, Page, request } from "@playwright/test";
 import { RequestLogger } from "./RequestLogger";
 
 
-export class UCIDIdentifierApi extends RequestLogger {
+export class ApiTemplate extends RequestLogger {
 
   readonly expectedStatus: number;
   readonly page: Page;
