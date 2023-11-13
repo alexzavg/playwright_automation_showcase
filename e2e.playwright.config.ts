@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
   workers: 1,
   retries: 1,
   reporter: [
-    ['line', ['html', { outputFolder: 'html-report/e2e', open: 'never' }]]
+    ['line', ['html', { outputFolder: 'html-report', open: 'never' }]]
   ],
   use: {
     ...base.use,
