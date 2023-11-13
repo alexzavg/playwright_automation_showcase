@@ -3,11 +3,11 @@ run-name: ⚙️ E2E tests STAGE
 
 # will run on weekdays at 08:00 (Kiev TZ) / 03:00 EST
 on:
-  schedule:
-    - cron: '0 5 * * 1-5'
-  # push:
-  #   branches:
-  #     - template
+  # schedule:
+  #   - cron: '0 5 * * 1-5'
+  push:
+    branches:
+      - main
 
 # variables https://github.com/alexzavg/playwright_automation_showcase/settings/variables/actions
 env:
@@ -43,3 +43,9 @@ jobs:
 
     - name: ⚙️ Run E2E tests
       run: xvfb-run npm run $TEST_SUITE
+
+    - name: 📊 Deploy HTML Report
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        publish_dir: ./html-report
