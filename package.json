@@ -25,6 +25,7 @@
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "playwright": "^1.39.0",
+    "playwright-html": "^0.1.13",
     "request": "^2.88.2",
     "speakeasy": "^2.0.0",
     "ts-node": "^10.9.1",

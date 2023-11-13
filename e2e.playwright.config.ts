@@ -6,9 +6,17 @@ const config: PlaywrightTestConfig = {
   fullyParallel: false,
   timeout: 10 * 90 * 1000, // 15 minutes
   workers: 1,
-  retries: 1,
+  retries: 0,
   reporter: [
-    ['line', ['html', { outputFolder: 'html-report', open: 'never' }]]
+    ['playwright-html', { 
+      testFolder: 'tests',
+      title: 'Playwright HTML Report',
+      embedAssets: true,
+      embedAttachments: true,
+      outputFolder: 'playwright-html-report',
+      minifyAssets: true,
+      startServer: true,
+    }]
   ],
   use: {
     ...base.use,
