@@ -8,6 +8,7 @@ const config: PlaywrightTestConfig = {
   workers: 1,
   retries: 0,
   reporter: [
+    //['list'],
     ['playwright-html', { 
       testFolder: 'tests',
       title: 'Playwright HTML Report',
@@ -15,7 +16,7 @@ const config: PlaywrightTestConfig = {
       embedAttachments: true,
       outputFolder: 'html-report',
       minifyAssets: true,
-      startServer: true,
+      startServer: false
     }]
   ],
   use: {
