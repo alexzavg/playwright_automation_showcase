@@ -4,10 +4,10 @@
   "description": "Playwright Automation Showcase",
   "main": "index.js",
   "scripts": {
+    "ui_mode": "npx playwright test --ui",
     "auto-commit": "bash ./scripts/git_auto_commit.sh",
     "kill_npm": "pkill -f 'npm run'",
     "setup": "npm i && npm i -g ts-node && npx playwright install --with-deps",
-    "ui_mode": "npx playwright test --ui",
     "template": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=template",
     "e2e_tests_stage": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=e2e",
     "e2e_tests_prod": "cross-env test_env=prod npx playwright test --config=e2e.playwright.config.ts --project=e2e"
