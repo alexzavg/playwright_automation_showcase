@@ -9,4 +9,5 @@
    3. `npx playwright install --with-deps`
    *if you encounter an `EACCESS` error - try the same command with `sudo` at the beginning
 4. Run `npm run template` - if test passes then you did everything right :)
-5. See available commands in `package.json`
+5. HTML report is published at https://alexzavg.github.io/playwright_automation_showcase/
+6. See available commands in `package.json`

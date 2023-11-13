@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import {PageActions} from "../../Pages/PageActions";
 
 
 test.describe('suite', () => {
@@ -12,10 +13,14 @@ test.describe('suite', () => {
   });
 
   test('pass', async ({page}) => {
+    const pageActions = new PageActions(page)
+    await pageActions.openUrl("https://www.google.com")
     expect(true).toBe(true)
   });
 
   test('fail', async ({page}) => {
+    const pageActions = new PageActions(page)
+    await pageActions.openUrl("https://www.google.com")
     expect(false).toBe(true)
   });
 

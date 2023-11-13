@@ -1,6 +1,6 @@
 // Documentation https://playwright.dev/docs/api/class-apirequestcontext
 import { Page } from '@playwright/test';
-import { PageActions } from '../Pages/PageActions.page';
+import { PageActions } from '../Pages/PageActions';
 
 
 export class PageTemplate extends PageActions {
