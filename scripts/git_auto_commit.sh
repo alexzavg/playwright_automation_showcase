@@ -10,3 +10,4 @@ git commit -m "Auto commit"
 # Force push to the remote repository
 # Replace 'main' with your branch name if different
 git push origin main --force
+ 
