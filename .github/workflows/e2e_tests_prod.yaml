@@ -68,7 +68,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./e2e_tests_prod
+        publish_dir: e2e_tests_prod
         destination_dir: e2e_tests_prod
 
     - name: Notify Slack about success
