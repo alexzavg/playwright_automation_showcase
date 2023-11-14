@@ -51,10 +51,16 @@ jobs:
     - name: 📊 Prepare HTML Report Directory
       if: always()
       run: |
-        mkdir -p stage
-        cp -r html-report/* stage/
-        chmod +x ./scripts/retain-history.sh
-        ./scripts/retain-history.sh stage
+        mkdir -p $GITHUB_WORKSPACE/stage
+        echo "Current working directory:"
+        pwd
+        echo "Contents of the current working directory:"
+        ls -la
+        echo "Attempting to copy html-report to stage directory"
+        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/stage/
+        chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
+        $GITHUB_WORKSPACE/scripts/retain-history.sh stage
+      shell: bash
 
     - name: 📊 Deploy HTML Report
       if: always()
