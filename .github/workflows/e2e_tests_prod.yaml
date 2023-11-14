@@ -18,7 +18,7 @@ env:
   SLACK_WEBHOOK:   ${{vars.SLACK_WEBHOOK}}
   SLACK_USER:      ${{vars.SLACK_USER}}
   CI_PIPELINE_URL: "https://github.com/alexzavg/playwright_automation_showcase/actions/runs/${{github.run_id}}"
-  REPORT_URL:      ${{vars.HTML_REPORT_E2E_TESTS_STAGE}}
+  REPORT_URL:      ${{vars.HTML_REPORT_E2E_TESTS_PROD}}
   NODE_VERSION:    20.x
 
 jobs:
