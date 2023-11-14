@@ -48,29 +48,6 @@ jobs:
     - name: ⚙️ Run E2E tests
       run: xvfb-run npm run $TEST_SUITE
 
-    - name: 🧹 Clean up e2e_tests_stage directory from gh-pages
-      if: always()
-      run: |
-        echo "Checkout the gh-pages branch"
-        git fetch origin gh-pages
-        git checkout gh-pages
-        
-        echo "Delete the e2e_tests_stage directory"
-        rm -rf e2e_tests_stage
-        
-        echo "Commit the changes"
-        git config user.name 'github-actions[bot]'
-        git config user.email 'github-actions[bot]@users.noreply.github.com'
-        git add -A
-        git commit -m "Remove e2e_tests_stage directory"
-        
-        echo "Force push the changes back to the gh-pages branch"
-        git push origin gh-pages --force
-
-        echo "Checkout back to the original branch"
-        git checkout main
-      shell: bash 
-
     - name: 📊 Prepare HTML Report Directory
       if: always()
       run: |
