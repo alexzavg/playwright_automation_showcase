@@ -7,7 +7,7 @@ on:
   #   - cron: '0 5 * * 1-5'
   push:
     branches:
-      - mains
+      - main
 
 # variables https://github.com/alexzavg/playwright_automation_showcase/settings/variables/actions
 env:
@@ -51,13 +51,22 @@ jobs:
     - name: 📊 Prepare HTML Report Directory
       if: always()
       run: |
+        echo "Removing existing e2e_tests_stage directory if it exists..."
+        rm -rf $GITHUB_WORKSPACE/e2e_tests_stage
+        
+        echo "Creating e2e_tests_stage directory..."
         mkdir -p $GITHUB_WORKSPACE/e2e_tests_stage
+        
         echo "Current working directory:"
         pwd
+        
         echo "Contents of the current working directory:"
         ls -la
+        
         echo "Attempting to copy html-report to e2e_tests_stage directory"
         cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_stage/
+        
+        echo "Running retain-history script"
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
         $GITHUB_WORKSPACE/scripts/retain-history.sh e2e_tests_stage
       shell: bash
