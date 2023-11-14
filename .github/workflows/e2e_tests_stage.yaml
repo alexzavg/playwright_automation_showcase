@@ -52,14 +52,14 @@ jobs:
       if: always()
       run: |
         # Create the directory with the name stored in TEST_SUITE variable
-        mkdir -p $GITHUB_WORKSPACE/${TEST_SUITE}
+        mkdir -p $TEST_SUITE
         
         # Copy the reports to the newly created directory
-        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/${TEST_SUITE}/
+        cp -r $GITHUB_WORKSPACE/html-report/* $TEST_SUITE
         
         # Make the retain-history script executable and run it
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
-        $GITHUB_WORKSPACE/scripts/retain-history.sh ${TEST_SUITE}
+        $GITHUB_WORKSPACE/scripts/retain-history.sh $TEST_SUITE
       shell: bash
 
     - name: 📊 Deploy HTML Report
