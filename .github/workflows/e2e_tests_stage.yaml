@@ -49,25 +49,25 @@ jobs:
       run: xvfb-run npm run $TEST_SUITE
 
     - name: 📊 Prepare HTML Report Directory
-      if: always()
       run: |
-        # Create the directory with the name stored in TEST_SUITE variable
-        mkdir -p $TEST_SUITE
-        
-        # Copy the reports to the newly created directory
-        cp -r $GITHUB_WORKSPACE/html-report/* $TEST_SUITE
-        
-        # Make the retain-history script executable and run it
+        mkdir -p $GITHUB_WORKSPACE/e2e_tests_stage
+        echo "Current working directory:"
+        pwd
+        echo "Contents of the current working directory:"
+        ls -la
+        echo "Attempting to copy html-report to e2e_tests_stage directory"
+        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_stage/
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
-        $GITHUB_WORKSPACE/scripts/retain-history.sh $TEST_SUITE
+        $GITHUB_WORKSPACE/scripts/retain-history.sh e2e_tests_stage
       shell: bash
-
+    
     - name: 📊 Deploy HTML Report
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ env.TEST_SUITE }}
+        publish_dir: ./e2e_tests_stage
+        destination_dir: e2e_tests_stage
 
     - name: Notify Slack about success
       if: success()
