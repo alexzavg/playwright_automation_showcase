@@ -7,7 +7,7 @@ on:
 #     - cron: '0 6 * * 1'
   push:
     branches:
-      - template
+      - main
 
 # variables https://github.com/alexzavg/playwright_automation_showcase/settings/variables/actions
 env:
@@ -18,7 +18,8 @@ env:
   SLACK_WEBHOOK:   ${{vars.SLACK_WEBHOOK}}
   SLACK_USER:      ${{vars.SLACK_USER}}
   CI_PIPELINE_URL: "https://github.com/alexzavg/playwright_automation_showcase/actions/runs/${{github.run_id}}"
-  NODE_VERSION:    18.x
+  REPORT_URL:      ${{vars.HTML_REPORT_E2E_TESTS_STAGE}}
+  NODE_VERSION:    20.x
 
 jobs:
   e2e_tests:
@@ -48,24 +49,39 @@ jobs:
     - name: ⚙️ Run E2E tests
       run: xvfb-run npm run $TEST_SUITE
 
+    - name: 📊 Prepare HTML Report Directory
+      if: always()
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/e2e_tests_prod
+        echo "Current working directory:"
+        pwd
+        echo "Contents of the current working directory:"
+        ls -la
+        echo "Attempting to copy html-report to e2e_tests_prod directory"
+        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_prod/
+        chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
+        $GITHUB_WORKSPACE/scripts/retain-history.sh e2e_tests_prod
+      shell: bash
+    
     - name: 📊 Deploy HTML Report
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{secrets.GITHUB_TOKEN}}
-        publish_dir: ./html-report
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./e2e_tests_prod
+        destination_dir: e2e_tests_prod
 
     - name: Notify Slack about success
       if: success()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#2EB67D\",\"text\":\":test_tube: :white_check_mark: Pod B *$ENV_NAME*: test suite *$TEST_SUITE* has succeeded, <$CI_PIPELINE_URL|view logs>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#2EB67D\",\"text\":\":test_tube: :white_check_mark: Test suite *$TEST_SUITE* has succeeded, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
 
     - name: Notify Slack about failure
       if: failure()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#E01E5A\",\"text\":\":test_tube: :x: Pod B *$ENV_NAME*: test suite *$TEST_SUITE* has failed, <$CI_PIPELINE_URL|view logs>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#E01E5A\",\"text\":\":test_tube: :x: Test suite *$TEST_SUITE* has failed, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
 
     - name: Notify Slack about cancellation
       if: cancelled()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#808080\",\"text\":\":test_tube: :black_square_for_stop: Pod B *$ENV_NAME*: test suite *$TEST_SUITE* was cancelled, <$CI_PIPELINE_URL|view logs>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#808080\",\"text\":\":test_tube: :black_square_for_stop: Test suite *$TEST_SUITE* was cancelled, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
