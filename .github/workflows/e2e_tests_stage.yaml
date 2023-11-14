@@ -53,6 +53,9 @@ jobs:
       run: |
         mkdir -p $GITHUB_WORKSPACE/$TEST_SUITE
         cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/$TEST_SUITE/
+        chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
+        $GITHUB_WORKSPACE/scripts/retain-history.sh stage
+      shell: bash
 
     - name: 📊 Deploy HTML Report
       if: always()
