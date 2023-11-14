@@ -51,10 +51,10 @@ jobs:
     - name: 📊 Prepare HTML Report Directory
       if: always()
       run: |
-        mkdir -p $GITHUB_WORKSPACE/$TEST_SUITE
-        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/$TEST_SUITE/
+        mkdir -p $GITHUB_WORKSPACE/e2e_tests_stage
+        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_stage/
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
-        $GITHUB_WORKSPACE/scripts/retain-history.sh $TEST_SUITE
+        $GITHUB_WORKSPACE/scripts/retain-history.sh e2e_tests_stage
       shell: bash
 
     - name: 📊 Deploy HTML Report
@@ -62,8 +62,8 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./$TEST_SUITE
-        destination_dir: $TEST_SUITE
+        publish_dir: ./e2e_tests_stage
+        destination_dir: e2e_tests_stage
 
     - name: Notify Slack about success
       if: success()
