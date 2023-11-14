@@ -53,6 +53,7 @@ jobs:
       run: |
         mkdir -p stage
         cp -r html-report/* stage/
+        chmod +x ./scripts/retain-history.sh
         ./scripts/retain-history.sh stage
 
     - name: 📊 Deploy HTML Report
