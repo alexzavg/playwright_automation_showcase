@@ -52,6 +52,11 @@ jobs:
       if: always()
       run: |
         mkdir -p $GITHUB_WORKSPACE/$TEST_SUITE
+        echo "Current working directory:"
+        pwd
+        echo "Contents of the current working directory:"
+        ls -la
+        echo "Attempting to copy html-report to $TEST_SUITE directory"
         cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/$TEST_SUITE/
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
         $GITHUB_WORKSPACE/scripts/retain-history.sh $TEST_SUITE
@@ -62,8 +67,8 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: $GITHUB_WORKSPACE/$TEST_SUITE
-        destination_dir: $GITHUB_WORKSPACE/$TEST_SUITE
+        publish_dir: ./$TEST_SUITE
+        destination_dir: $TEST_SUITE
 
     - name: Notify Slack about success
       if: success()

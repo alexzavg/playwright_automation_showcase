@@ -13,10 +13,10 @@ if [ ! -d "$DIR_PATH" ]; then
 fi
 
 # Navigate to the directory
-cd "$DIR_PATH" || exit
+cd $DIR_PATH || exit
 
 # Retain the latest 3 reports
 ls -t | tail -n +4 | xargs rm -rf --
 
 # Go back to the root directory
-cd "$GITHUB_WORKSPACE" || exit
+cd $GITHUB_WORKSPACE || exit
