@@ -52,6 +52,11 @@ jobs:
       if: always()
       run: |
         mkdir -p $GITHUB_WORKSPACE/e2e_tests_stage
+        echo "Current working directory:"
+        pwd
+        echo "Contents of the current working directory:"
+        ls -la
+        echo "Attempting to copy html-report to e2e_tests_stage directory"
         cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_stage/
         chmod +x $GITHUB_WORKSPACE/scripts/retain-history.sh
         $GITHUB_WORKSPACE/scripts/retain-history.sh e2e_tests_stage
@@ -68,15 +73,15 @@ jobs:
     - name: Notify Slack about success
       if: success()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#2EB67D\",\"text\":\":test_tube: :white_check_mark: Test suite *$TEST_SUITE* has succeeded, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Playwright\",\"attachments\":[{\"color\":\"#2EB67D\",\"text\":\":test_tube: :white_check_mark: Test suite *$TEST_SUITE* has succeeded, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
   
     - name: Notify Slack about failure
       if: failure()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#E01E5A\",\"text\":\":test_tube: :x: Test suite *$TEST_SUITE* has failed, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Playwright\",\"attachments\":[{\"color\":\"#E01E5A\",\"text\":\":test_tube: :x: Test suite *$TEST_SUITE* has failed, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
 
     - name: Notify Slack about cancellation
       if: cancelled()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Github\",\"attachments\":[{\"color\":\"#808080\",\"text\":\":test_tube: :black_square_for_stop: Test suite *$TEST_SUITE* was cancelled, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
+        curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Playwright\",\"attachments\":[{\"color\":\"#808080\",\"text\":\":test_tube: :black_square_for_stop: Test suite *$TEST_SUITE* was cancelled, <$CI_PIPELINE_URL|VIEW LOGS>, <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
  
