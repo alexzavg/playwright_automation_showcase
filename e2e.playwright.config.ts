@@ -3,9 +3,9 @@ import base from './playwright.config';
 
 const config: PlaywrightTestConfig = {
   ...base,
-  fullyParallel: false,
+  fullyParallel: true,
   timeout: 10 * 90 * 1000, // 15 minutes
-  workers: 1,
+  workers: 2,
   retries: 0,
   reporter: [
     //['list'],
