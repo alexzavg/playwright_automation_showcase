@@ -1,5 +1,5 @@
 // Documentation https://playwright.dev/docs/api/class-apirequestcontext
-import { Page, test } from '@playwright/test';
+import { Page, test, expect } from '@playwright/test';
 import { PageActions } from '../Pages/PageActions';
 
 interface RegisterUserParams {
@@ -135,6 +135,8 @@ export class AutomationPractice extends PageActions {
       await this.clickElement(this.deleteAccountBtn);
       await this.waitForElement(this.accountDeletedText);
       await this.clickElement(this.continueBtn);
+
+      expect(false).toEqual(true);
     });
   };
 
