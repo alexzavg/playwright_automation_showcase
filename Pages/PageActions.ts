@@ -143,11 +143,7 @@ export class PageActions {
 
   public async selectDropdownOption(locator: string, option: string) {
     await test.step(`Select '${option}' from dropdown with locator '${locator}'`, async () => {
-      const dropdown = await this.page.$(locator);
-      await dropdown.click();
-  
-      const optionElement = await this.page.$(`${locator} option[value="${option}"]`);
-      await optionElement.click();
+      await this.page.locator(locator).selectOption(option);
     });
   };
 

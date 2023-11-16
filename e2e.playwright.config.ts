@@ -5,10 +5,10 @@ const config: PlaywrightTestConfig = {
   ...base,
   fullyParallel: true,
   timeout: 10 * 90 * 1000, // 15 minutes
-  workers: 2,
+  workers: 1,
   retries: 0,
   reporter: [
-    //['list'],
+    ['list'],
     ['playwright-html', { 
       testFolder: 'tests',
       title: 'Playwright HTML Report',
@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
   use: {
     ...base.use,
     headless: false,
-    viewport: { width: 1920, height: 1080 },
+    viewport: null, //{ width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     launchOptions: {
       slowMo: 250,

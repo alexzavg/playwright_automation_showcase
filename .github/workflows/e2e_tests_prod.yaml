@@ -7,7 +7,7 @@ on:
 #     - cron: '0 6 * * 1'
   push:
     branches:
-      - main
+      - your_branch_name
 
 # variables https://github.com/alexzavg/playwright_automation_showcase/settings/variables/actions
 env:
