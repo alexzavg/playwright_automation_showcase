@@ -89,4 +89,4 @@ jobs:
       if: cancelled()
       run: |
         curl -X POST -H 'Content-type: application/json' --data "{\"channel\":\"$SLACK_CHANNEL\",\"username\":\"Playwright\",\"attachments\":[{\"color\":\"#808080\",\"text\":\":test_tube: :black_square_for_stop: Test suite *$TEST_SUITE* was cancelled, :book: <$CI_PIPELINE_URL|VIEW LOGS>, :bar_chart: <$REPORT_URL|VIEW REPORT>, <$SLACK_USER>\",\"footer\":\"Time: $(TZ=$TZ date)\"}]}" $SLACK_WEBHOOK
- 
+  
