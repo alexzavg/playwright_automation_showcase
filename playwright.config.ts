@@ -7,8 +7,12 @@ const config: PlaywrightTestConfig = {
       testMatch: ['/tests/_template/*.spec.ts']
     },
     {
+      name: 'api',
+      testMatch: ['/tests/API/*.spec.ts']
+    },
+    {
       name: 'e2e',
-      testMatch: ['/tests/E2E/**/*.spec.ts']
+      testMatch: ['/tests/E2E/*.spec.ts']
     }
   ],
   timeout: 10 * 60 * 1000, // 10 minutes

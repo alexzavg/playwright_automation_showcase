@@ -9,6 +9,7 @@
     "kill_npm": "pkill -f 'npm run'",
     "setup": "npm i && npm i -g ts-node && npx playwright install --with-deps",
     "template": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=template",
+    "api_tests_stage": "cross-env test_env=stage npx playwright test --config=api.playwright.config.ts --project=api",
     "e2e_tests_stage": "cross-env test_env=stage npx playwright test --config=e2e.playwright.config.ts --project=e2e",
     "e2e_tests_prod": "cross-env test_env=prod npx playwright test --config=e2e.playwright.config.ts --project=e2e"
   },

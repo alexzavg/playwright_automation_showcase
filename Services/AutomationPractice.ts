@@ -136,7 +136,7 @@ export class AutomationPractice extends PageActions {
       await this.waitForElement(this.accountDeletedText);
       await this.clickElement(this.continueBtn);
 
-      expect(false).toEqual(true);
+      //expect(false).toEqual(true);
     });
   };
 

@@ -1,5 +1,5 @@
-name: e2e_tests_stage
-run-name: ⚙️ E2E tests STAGE
+name: api_tests_stage
+run-name: ⚙️ API tests STAGE
 
 # will run on weekdays at 08:00 (Kiev TZ) / 03:00 EST
 on:
@@ -12,17 +12,17 @@ on:
 # variables https://github.com/alexzavg/playwright_automation_showcase/settings/variables/actions
 env:
   TZ:              ${{vars.TZ}}
-  TEST_SUITE:      ${{vars.E2E_TESTS_STAGE}}
+  TEST_SUITE:      ${{vars.API_TESTS_STAGE}}
   SLACK_CHANNEL:   ${{vars.SLACK_CHANNEL}}
   SLACK_WEBHOOK:   ${{vars.SLACK_WEBHOOK}}
   SLACK_USER:      ${{vars.SLACK_USER}}
   CI_PIPELINE_URL: "https://github.com/alexzavg/playwright_automation_showcase/actions/runs/${{github.run_id}}"
-  REPORT_URL:      ${{vars.HTML_REPORT_E2E_TESTS_STAGE}}
+  REPORT_URL:      ${{vars.HTML_REPORT_API_TESTS_STAGE}}
   NODE_VERSION:    20.x
 
 jobs:
-  e2e_tests:
-    name: ⚙️ E2E tests STAGE
+  api_tests:
+    name: ⚙️ API tests STAGE
     runs-on: ubuntu-latest
     steps:
     - name: 🔎 List all environment variables
@@ -45,17 +45,17 @@ jobs:
     - name: 📝 Create .env file
       run: echo "${{secrets.CONFIG_STAGE}}" > .env.stage
 
-    - name: ⚙️ Run E2E tests
+    - name: ⚙️ Run API tests
       run: xvfb-run npm run $TEST_SUITE
 
     - name: 📊 Prepare HTML Report Directory
       if: always()
       run: |
-        echo "Removing existing e2e_tests_stage directory if it exists..."
-        rm -rf $GITHUB_WORKSPACE/e2e_tests_stage
+        echo "Removing existing api_tests_stage directory if it exists..."
+        rm -rf $GITHUB_WORKSPACE/api_tests_stage
         
-        echo "Creating e2e_tests_stage directory..."
-        mkdir -p $GITHUB_WORKSPACE/e2e_tests_stage
+        echo "Creating api_tests_stage directory..."
+        mkdir -p $GITHUB_WORKSPACE/api_tests_stage
         
         echo "Current working directory:"
         pwd
@@ -63,8 +63,8 @@ jobs:
         echo "Contents of the current working directory:"
         ls -la
         
-        echo "Attempting to copy html-report to e2e_tests_stage directory"
-        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/e2e_tests_stage/
+        echo "Attempting to copy html-report to api_tests_stage directory"
+        cp -r $GITHUB_WORKSPACE/html-report/* $GITHUB_WORKSPACE/api_tests_stage/
       shell: bash
     
     - name: 📊 Deploy HTML Report
@@ -72,8 +72,8 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: e2e_tests_stage
-        destination_dir: e2e_tests_stage
+        publish_dir: api_tests_stage
+        destination_dir: api_tests_stage
 
     - name: Notify Slack about success
       if: success()
