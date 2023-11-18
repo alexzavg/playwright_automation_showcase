@@ -3,7 +3,7 @@ import { DataGenerator } from "../../Services/DataGenerator";
 import { AutomationPracticeAPI } from "../../Services/AutomationPracticeAPI";
 
 
-test.describe('suite', () => {
+test.describe('API Tests', () => {
 
   const dataGenerator = new DataGenerator();
   const api = new AutomationPracticeAPI();
