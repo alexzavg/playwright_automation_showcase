@@ -1,4 +1,8 @@
+- [Demo](#demo)
 - [Setup](#setup)
+
+# Demo
+Repository showcase is provided in this video https://www.youtube.com/watch?v=S5dfRWLARJc&list=PLSnWDeuB4mSaL1oKBJhi9bwcUEvW6aMm3&index=9
 
 # Setup
 1. Install [nodejs & npm](https://nodejs.org/en/) 
