@@ -173,6 +173,15 @@ export class PageActions {
     });
   };
 
+  public async dragAndDrop(item_to_drag: string, item_to_drop: string) {
+    await test.step(`Drag element '${item_to_drag}' and drop it to element '${item_to_drop}'`, async () => {
+      await this.page.locator(item_to_drag).hover();
+      await this.page.mouse.down();
+      await this.page.locator(item_to_drop).hover();
+      await this.page.mouse.up();
+    });
+  };
+
   public async getCookie(URL: string, cookieName: string){
     var cookie = await this.page.context().cookies(URL);
     //console.log("cookie text: " + JSON.stringify(cookie));
